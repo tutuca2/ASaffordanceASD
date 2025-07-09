@@ -328,6 +328,7 @@ var AS_happy;
 var AS_unhappy;
 var button_proxima;
 var tela_transicaoClock;
+var text_2;
 var engajamentoClock;
 var text;
 var sliderAtencao;
@@ -503,6 +504,18 @@ async function experimentInit() {
   
   // Initialize components for Routine "tela_transicao"
   tela_transicaoClock = new util.Clock();
+  text_2 = new visual.TextStim({
+    win: psychoJS.window,
+    name: 'text_2',
+    text: '',
+    font: 'Arial',
+    units: undefined, 
+    pos: [0, 0], draggable: false, height: 0.05,  wrapWidth: undefined, ori: 0.0,
+    languageStyle: 'LTR',
+    color: new util.Color('white'),  opacity: undefined,
+    depth: 0.0 
+  });
+  
   // Initialize components for Routine "engajamento"
   engajamentoClock = new util.Clock();
   text = new visual.TextStim({
@@ -569,7 +582,7 @@ async function experimentInit() {
     colorSpace: 'rgb',
     pos: [0, (- 0.35)],
     letterHeight: 0.04,
-    size: [0.4, 0.16],
+    size: [0.6, 0.2],
     ori: 0.0
     ,
     depth: -1
@@ -1044,9 +1057,10 @@ function tela_transicaoRoutineBegin(snapshot) {
     routineTimer.add(2.000000);
     tela_transicaoMaxDurationReached = false;
     // update component parameters for each repeat
-    tela_transicaoMaxDuration = 2
+    tela_transicaoMaxDuration = 2.0
     // keep track of which components have finished
     tela_transicaoComponents = [];
+    tela_transicaoComponents.push(text_2);
     
     tela_transicaoComponents.forEach( function(thisComponent) {
       if ('status' in thisComponent)
@@ -1057,6 +1071,7 @@ function tela_transicaoRoutineBegin(snapshot) {
 }
 
 
+var frameRemains;
 function tela_transicaoRoutineEachFrame() {
   return async function () {
     //--- Loop for each frame of Routine 'tela_transicao' ---
@@ -1069,6 +1084,21 @@ function tela_transicaoRoutineEachFrame() {
         tela_transicaoMaxDurationReached = true
         continueRoutine = false
     }
+    
+    // *text_2* updates
+    if (t >= 0.0 && text_2.status === PsychoJS.Status.NOT_STARTED) {
+      // keep track of start time/frame for later
+      text_2.tStart = t;  // (not accounting for frame time here)
+      text_2.frameNStart = frameN;  // exact frame index
+      
+      text_2.setAutoDraw(true);
+    }
+    
+    frameRemains = 0.0 + 2.0 - psychoJS.window.monitorFramePeriod * 0.75;// most of one frame period left
+    if (text_2.status === PsychoJS.Status.STARTED && t >= frameRemains) {
+      text_2.setAutoDraw(false);
+    }
+    
     // check for quit (typically the Esc key)
     if (psychoJS.experiment.experimentEnded || psychoJS.eventManager.getKeys({keyList:['escape']}).length > 0) {
       return quitPsychoJS('The [Escape] key was pressed. Goodbye!', false);
@@ -1288,7 +1318,7 @@ function Tela_FinalRoutineBegin(snapshot) {
     // update component parameters for each repeat
     // reset button_salvar_resultados to account for continued clicks & clear times on/off
     button_salvar_resultados.reset()
-    Tela_FinalMaxDuration = 15
+    Tela_FinalMaxDuration = 15.0
     // keep track of which components have finished
     Tela_FinalComponents = [];
     Tela_FinalComponents.push(textFinal);
@@ -1327,7 +1357,7 @@ function Tela_FinalRoutineEachFrame() {
     
     
     // *button_salvar_resultados* updates
-    if (t >= 3 && button_salvar_resultados.status === PsychoJS.Status.NOT_STARTED) {
+    if (t >= 3.0 && button_salvar_resultados.status === PsychoJS.Status.NOT_STARTED) {
       // keep track of start time/frame for later
       button_salvar_resultados.tStart = t;  // (not accounting for frame time here)
       button_salvar_resultados.frameNStart = frameN;  // exact frame index
