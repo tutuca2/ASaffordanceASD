@@ -290,6 +290,9 @@ psychoJS.start({
 
 psychoJS.experimentLogger.setLevel(core.Logger.ServerLevel.DATA);
 
+
+var currentLoop;
+var frameDur;
 async function updateInfo() {
   currentLoop = psychoJS.experiment;  // right now there are no loops
   expInfo['date'] = util.MonotonicClock.getDateStr();  // add a simple timestamp
@@ -317,6 +320,31 @@ async function updateInfo() {
   return Scheduler.Event.NEXT;
 }
 
+
+var InstrucoesClock;
+var text_instrucoes;
+var button_iniciar;
+var trialClock;
+var imageEstimulo;
+var image_intensity_cue_Alerta;
+var sliderAlerta;
+var AS_wideawake;
+var AS_sleepy;
+var image_intensity_cue_Valencia;
+var sliderValencia;
+var AS_happy;
+var AS_unhappy;
+var button_proxima;
+var tela_transicaoClock;
+var engajamentoClock;
+var text;
+var sliderAtencao;
+var button_terminar;
+var Tela_FinalClock;
+var textFinal;
+var button_salvar_resultados;
+var globalClock;
+var routineTimer;
 async function experimentInit() {
   // Initialize components for Routine "Instrucoes"
   InstrucoesClock = new util.Clock();
@@ -530,14 +558,31 @@ async function experimentInit() {
   textFinal = new visual.TextStim({
     win: psychoJS.window,
     name: 'textFinal',
-    text: 'Aguarde...\n\nSalvando seus resultados...',
+    text: 'Seus resultados serão salvos e baixados como um arquivo ".csv"\n\nPor favor envie esse arquivo ao pesquisador que te convidou a participar ou a Matheus Felippin:\n\nEmail: matheusfelippin@biof.ufrj.br\nou WhatsApp: (32) 98883-4300  ',
     font: 'Arial',
     units: undefined, 
-    pos: [0, 0], draggable: false, height: 0.05,  wrapWidth: undefined, ori: 0.0,
+    pos: [0, 0.2], draggable: false, height: 0.05,  wrapWidth: undefined, ori: 0.0,
     languageStyle: 'LTR',
     color: new util.Color('black'),  opacity: undefined,
     depth: 0.0 
   });
+  
+  button_salvar_resultados = new visual.ButtonStim({
+    win: psychoJS.window,
+    name: 'button_salvar_resultados',
+    text: 'Terminar experimento',
+    fillColor: [0.6549, 0.6549, 0.6549],
+    borderColor: [(- 1.0), (- 1.0), (- 1.0)],
+    color: 'black',
+    colorSpace: 'rgb',
+    pos: [0, (- 0.35)],
+    letterHeight: 0.04,
+    size: [0.4, 0.16],
+    ori: 0.0
+    ,
+    depth: -1
+  });
+  button_salvar_resultados.clock = new util.Clock();
   
   // Create some handy timers
   globalClock = new util.Clock();  // to track the time since experiment started
@@ -546,6 +591,13 @@ async function experimentInit() {
   return Scheduler.Event.NEXT;
 }
 
+
+var t;
+var frameN;
+var continueRoutine;
+var InstrucoesMaxDurationReached;
+var InstrucoesMaxDuration;
+var InstrucoesComponents;
 function InstrucoesRoutineBegin(snapshot) {
   return async function () {
     TrialHandler.fromSnapshot(snapshot); // ensure that .thisN vals are up to date
@@ -573,6 +625,7 @@ function InstrucoesRoutineBegin(snapshot) {
     return Scheduler.Event.NEXT;
   }
 }
+
 
 function InstrucoesRoutineEachFrame() {
   return async function () {
@@ -656,6 +709,7 @@ function InstrucoesRoutineEachFrame() {
   };
 }
 
+
 function InstrucoesRoutineEnd(snapshot) {
   return async function () {
     //--- Ending Routine 'Instrucoes' ---
@@ -679,6 +733,8 @@ function InstrucoesRoutineEnd(snapshot) {
   }
 }
 
+
+var trials;
 function trialsLoopBegin(trialsLoopScheduler, snapshot) {
   return async function() {
     TrialHandler.fromSnapshot(snapshot); // update internal variables (.thisN etc) of the loop
@@ -711,6 +767,7 @@ function trialsLoopBegin(trialsLoopScheduler, snapshot) {
   }
 }
 
+
 async function trialsLoopEnd() {
   // terminate loop
   psychoJS.experiment.removeLoop(trials);
@@ -721,6 +778,7 @@ async function trialsLoopEnd() {
     currentLoop = psychoJS.experiment;  // so we use addData from the experiment
   return Scheduler.Event.NEXT;
 }
+
 
 function trialsLoopEndIteration(scheduler, snapshot) {
   // ------Prepare for next entry------
@@ -741,6 +799,10 @@ function trialsLoopEndIteration(scheduler, snapshot) {
   };
 }
 
+
+var trialMaxDurationReached;
+var trialMaxDuration;
+var trialComponents;
 function trialRoutineBegin(snapshot) {
   return async function () {
     TrialHandler.fromSnapshot(snapshot); // ensure that .thisN vals are up to date
@@ -779,6 +841,7 @@ function trialRoutineBegin(snapshot) {
     return Scheduler.Event.NEXT;
   }
 }
+
 
 function trialRoutineEachFrame() {
   return async function () {
@@ -942,6 +1005,7 @@ function trialRoutineEachFrame() {
   };
 }
 
+
 function trialRoutineEnd(snapshot) {
   return async function () {
     //--- Ending Routine 'trial' ---
@@ -969,6 +1033,10 @@ function trialRoutineEnd(snapshot) {
   }
 }
 
+
+var tela_transicaoMaxDurationReached;
+var tela_transicaoMaxDuration;
+var tela_transicaoComponents;
 function tela_transicaoRoutineBegin(snapshot) {
   return async function () {
     TrialHandler.fromSnapshot(snapshot); // ensure that .thisN vals are up to date
@@ -991,6 +1059,7 @@ function tela_transicaoRoutineBegin(snapshot) {
     return Scheduler.Event.NEXT;
   }
 }
+
 
 function tela_transicaoRoutineEachFrame() {
   return async function () {
@@ -1030,6 +1099,7 @@ function tela_transicaoRoutineEachFrame() {
   };
 }
 
+
 function tela_transicaoRoutineEnd(snapshot) {
   return async function () {
     //--- Ending Routine 'tela_transicao' ---
@@ -1051,6 +1121,10 @@ function tela_transicaoRoutineEnd(snapshot) {
   }
 }
 
+
+var engajamentoMaxDurationReached;
+var engajamentoMaxDuration;
+var engajamentoComponents;
 function engajamentoRoutineBegin(snapshot) {
   return async function () {
     TrialHandler.fromSnapshot(snapshot); // ensure that .thisN vals are up to date
@@ -1080,6 +1154,7 @@ function engajamentoRoutineBegin(snapshot) {
     return Scheduler.Event.NEXT;
   }
 }
+
 
 function engajamentoRoutineEachFrame() {
   return async function () {
@@ -1173,6 +1248,7 @@ function engajamentoRoutineEachFrame() {
   };
 }
 
+
 function engajamentoRoutineEnd(snapshot) {
   return async function () {
     //--- Ending Routine 'engajamento' ---
@@ -1197,6 +1273,10 @@ function engajamentoRoutineEnd(snapshot) {
   }
 }
 
+
+var Tela_FinalMaxDurationReached;
+var Tela_FinalMaxDuration;
+var Tela_FinalComponents;
 function Tela_FinalRoutineBegin(snapshot) {
   return async function () {
     TrialHandler.fromSnapshot(snapshot); // ensure that .thisN vals are up to date
@@ -1209,42 +1289,13 @@ function Tela_FinalRoutineBegin(snapshot) {
     routineTimer.reset();
     Tela_FinalMaxDurationReached = false;
     // update component parameters for each repeat
-    // Desativar baixar os resultados para o navegador
-    psychoJS._saveResults = 0;
-    
-    // Gerar nome de arquivo para os resultados
-    let filename = psychoJS._experiment._experimentName + '_' psychoJS._experiment._datetime + '.csv';
-    
-    // Extrair data object do experimento
-    let dataObj = psychoJS._experiment._trialsData;
-    
-    // Converter data object para CSV
-    let data = [Object.keys(dataObj[0])].concat(dataObj).map(it => {
-        return Object.values(it).toString()
-    }).join('\n');
-    
-    // Mandar dados para OSF via DataPipe
-    console.log('Saving data...');
-    fetch('https://pipe.jspsych.org/api/data', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-            Accept: '*/*',
-        },
-        body: JSON.stringify({
-            experimentID: 'rxOTb2UxzPon', //DATAPIPE EXPERIMENT ID
-            filename: filename,
-            data: data,
-        }),
-    }).then(response => response.json()).then(data => {
-        // Registrar resposta e forçar fim do experimento
-        console.log(data);
-        quitPsychoJS();
-    });
+    // reset button_salvar_resultados to account for continued clicks & clear times on/off
+    button_salvar_resultados.reset()
     Tela_FinalMaxDuration = 15
     // keep track of which components have finished
     Tela_FinalComponents = [];
     Tela_FinalComponents.push(textFinal);
+    Tela_FinalComponents.push(button_salvar_resultados);
     
     for (const thisComponent of Tela_FinalComponents)
       if ('status' in thisComponent)
@@ -1252,6 +1303,7 @@ function Tela_FinalRoutineBegin(snapshot) {
     return Scheduler.Event.NEXT;
   }
 }
+
 
 function Tela_FinalRoutineEachFrame() {
   return async function () {
@@ -1275,6 +1327,45 @@ function Tela_FinalRoutineEachFrame() {
       textFinal.setAutoDraw(true);
     }
     
+    
+    // *button_salvar_resultados* updates
+    if (t >= 3 && button_salvar_resultados.status === PsychoJS.Status.NOT_STARTED) {
+      // keep track of start time/frame for later
+      button_salvar_resultados.tStart = t;  // (not accounting for frame time here)
+      button_salvar_resultados.frameNStart = frameN;  // exact frame index
+      
+      button_salvar_resultados.setAutoDraw(true);
+    }
+    
+    if (button_salvar_resultados.status === PsychoJS.Status.STARTED) {
+      // check whether button_salvar_resultados has been pressed
+      if (button_salvar_resultados.isClicked) {
+        if (!button_salvar_resultados.wasClicked) {
+          // store time of first click
+          button_salvar_resultados.timesOn.push(button_salvar_resultados.clock.getTime());
+          // store time clicked until
+          button_salvar_resultados.timesOff.push(button_salvar_resultados.clock.getTime());
+        } else {
+          // update time clicked until;
+          button_salvar_resultados.timesOff[button_salvar_resultados.timesOff.length - 1] = button_salvar_resultados.clock.getTime();
+        }
+        if (!button_salvar_resultados.wasClicked) {
+          // end routine when button_salvar_resultados is clicked
+          continueRoutine = false;
+          
+        }
+        // if button_salvar_resultados is still clicked next frame, it is not a new click
+        button_salvar_resultados.wasClicked = true;
+      } else {
+        // if button_salvar_resultados is clicked next frame, it is a new click
+        button_salvar_resultados.wasClicked = false;
+      }
+    } else {
+      // keep clock at 0 if button_salvar_resultados hasn't started / has finished
+      button_salvar_resultados.clock.reset();
+      // if button_salvar_resultados is clicked next frame, it is a new click
+      button_salvar_resultados.wasClicked = false;
+    }
     // check for quit (typically the Esc key)
     if (psychoJS.experiment.experimentEnded || psychoJS.eventManager.getKeys({keyList:['escape']}).length > 0) {
       return quitPsychoJS('The [Escape] key was pressed. Goodbye!', false);
@@ -1301,6 +1392,7 @@ function Tela_FinalRoutineEachFrame() {
   };
 }
 
+
 function Tela_FinalRoutineEnd(snapshot) {
   return async function () {
     //--- Ending Routine 'Tela_Final' ---
@@ -1309,6 +1401,9 @@ function Tela_FinalRoutineEnd(snapshot) {
         thisComponent.setAutoDraw(false);
       }
     }
+    psychoJS.experiment.addData('button_salvar_resultados.numClicks', button_salvar_resultados.numClicks);
+    psychoJS.experiment.addData('button_salvar_resultados.timesOn', button_salvar_resultados.timesOn);
+    psychoJS.experiment.addData('button_salvar_resultados.timesOff', button_salvar_resultados.timesOff);
     // the Routine "Tela_Final" was not non-slip safe, so reset the non-slip timer
     routineTimer.reset();
     
@@ -1320,12 +1415,14 @@ function Tela_FinalRoutineEnd(snapshot) {
   }
 }
 
+
 function importConditions(currentLoop) {
   return async function () {
     psychoJS.importAttributes(currentLoop.getCurrentTrial());
     return Scheduler.Event.NEXT;
     };
 }
+
 
 async function quitPsychoJS(message, isCompleted) {
   // Check for and save orphaned data
